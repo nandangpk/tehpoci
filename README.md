@@ -98,9 +98,7 @@ Menggunakan Laravel versi 9.19 dan PHP versi 8.0.2
 ---------------------
 
 ## #1 Menu Order (OrderController)
-> http://127.0.0.1:8000/order
 
-![image](https://user-images.githubusercontent.com/54816942/208220021-a85171f9-fb51-4881-86ab-cd843f7209bd.png)
 ---------------------
 ##### ROUTING
 app\routes\web.php
