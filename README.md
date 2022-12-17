@@ -319,7 +319,7 @@ mengambil seluruh data dari OrderDetail berdasarkan idOrder sekaligus me-return 
 ```
 menampilkan data yang di passing dari Controller ($order) dengan menggunakan _@foreach_ sekaligus membuat clickable button yang akan me-redirect ke '/data-penjualan/{$id}' (halaman detail data penjualan) yang di handle pada function show DataPenjualanController juga menghitung total belanja menggunakan variabel $total yang di looping didalam _@foreach_
 
-juga terdapat form untuk menampilkan data berdasarkan tanggal yang dipilih ('dari' dan 'sammpai')
+juga terdapat form untuk menampilkan data berdasarkan tanggal yang dipilih ('dari' dan 'sampai')
 
 ---------------------
 
@@ -448,7 +448,7 @@ mengambil seluruh / sebagian (tergantung pada request, defaultnya mengambil selu
 ```
 menampilkan data yang di passing dari Controller ($belanja) dengan menggunakan _@foreach_, menghitung total belanja menggunakan variabel $total yang di looping didalam _@foreach_
 
-juga terdapat form untuk menampilkan data berdasarkan tanggal yang dipilih ('dari' dan 'sammpai')
+juga terdapat form untuk menampilkan data berdasarkan tanggal yang dipilih ('dari' dan 'sampai')
 
 ---------------------
 
