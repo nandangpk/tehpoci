@@ -235,8 +235,8 @@ mengambil seluruh / sebagian (tergantung pada request, defaultnya mengambil selu
 ...
 public function show($idOrder)
 {
-	$orderDetail = OrderDetail::where("idOrder", $idOrder)->get();
-	return view('data-penjualan.detail', ["idOrder" => $idOrder, "orderDetail" => $orderDetail]);
+  $orderDetail = OrderDetail::where("idOrder", $idOrder)->get();
+  return view('data-penjualan.detail', ["idOrder" => $idOrder, "orderDetail" => $orderDetail]);
 }
 ...
 ```
@@ -339,9 +339,6 @@ menampilkan data yang di passing dari Controller ($idOrder, $orderDetail) dengan
 
 ---------------------
 
-
-
-
 ## #3 Menu Data Belanja (DataBelanjaController)
 
 ---------------------
@@ -439,6 +436,113 @@ app\resources\views\data-penjualan\index.blade.php
 menampilkan data yang di passing dari Controller ($belanja) dengan menggunakan _@foreach_, menghitung total belanja menggunakan variabel $total yang di looping didalam _@foreach_
 
 juga terdapat form untuk menampilkan data berdasarkan tanggal yang dipilih ('dari' dan 'sammpai')
+
+---------------------
+
+## #4 Menu KelolaMinuman (MinumanController)
+
+---------------------
+
+##### ROUTING
+app\routes\web.php
+```php
+...
+Route::resource('minuman', MinumanController::class);
+Route::get('/minuman/hapus/{idMinuman}', 'App\Http\Controllers\MinumanController@destroy');
+...
+```
+melakukan routing pada agar bisa di akses melalui /minuman
+
+---------------------
+
+##### GET DATA DARI CONTROLLER + RETURN VIEW DENGAN DATA
+app\Http\Controller\MinumanController.php
+```php
+...
+public function index()
+{
+  $minuman = Minuman::All();
+  return view( 'minuman.index', ['minuman' => $minuman]);
+}
+...
+```
+```
+route: /minuman
+target: minuman/index.blade.php
+```
+
+mengambil seluruh data minuman pada function index MinumanController sekaligus me-return view beserta data-nya ($minuman)
+
+---------------------
+
+##### MENAMPILKAN DATA MINUMAN DARI CONTROLLER PADA BLADE
+app\resources\views\minuman\index.blade.php
+```html
+...
+<figure class="text-end">
+  <a href="{{route('minuman.create')}}">
+    <button type="button" class="btn btn-sm btn-primary" id="btn-tambah-minuman">Tambah Minuman</button>
+  </a>
+</figure>
+<table class="table mt-3">
+  <tr class="text-start">
+    <th>Varian</th>
+    <th>Modal</th>
+    <th>Harga</th>
+    <th>Stok</th>
+    <th>Aksi</th>
+  </tr>
+  @foreach ($minuman as $min)
+  <tr>
+    <td>{{$min->varian}}</td>
+    <td>{{$min->modal}}</td>
+    <td>{{$min->harga}}</td>
+    <td>{{$min->stok}}</td>
+    <td>
+      <a href="{{ route('minuman.edit', [$min->idMinuman]) }}">
+        <button type="button" class="btn btn-sm btn-success">Edit</button>
+      </a>
+      <a href="/minuman/hapus/{{ $min->idMinuman }}" onclick="return confirm('Yakin Ingin menghapus data?')">
+        <button type="button" class="btn btn-sm btn-danger">Hapus</button>
+      </a>
+    </td>
+  </tr>
+  @endforeach
+</table>
+...
+```
+menampilkan data yang di passing dari Controller ($minuman) dengan menggunakan _@foreach_, sekaligus membuat clickable button edit dan hapus yang dibuat didalam _@foreach_ yang akan me-redirect ke '/minuman/{$idMinuman}' (button edit -> halaman edit minuman) yang di handle pada function edit MinumanController dan button hapus berfungsi untuk menghapus minuman yang akan me-redirect ke (/minuman/hapus/{$idMinuman}) yang di handle pada function destroy MinumanController.
+
+terdapat button di atas untuk menuju ke '/minuman/create' (halaman tambah minuman) yang akan di handle pada function create MinumanController. 
+
+---------------------
+
+##### MENAMBAHKAN DATA MINUMAN
+app\resources\views\minuman\tambah.blade.php
+```html
+...
+<form action="{{route('minuman.store')}}" method="post">
+@csrf
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="varian" name="varian" required>
+    <label for="varian">Varian</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" id="modal" name="modal" required>
+    <label for="harga">Modal</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" id="harga" name="harga" required>
+    <label for="harga">Harga</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" id="stok" name="stok" required>
+    <label for="stok">Stok</label>
+  </div>
+  <input type="submit" class="btn btn-primary w-100" value="Tambah Minuman">
+</form>
+...
+```
 
 ---------------------
 
