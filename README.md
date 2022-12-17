@@ -163,8 +163,30 @@ app\routes\web.php
 Route::resource('data-penjualan', DataPenjualanController::class);
 ...
 ```
+melakukan routing pada agar bisa di akses melalui /data-penjualan
 ##### GET DATA DARI CONTROLLER + RETURN VIEW DENGAN DATA
-##### MENAMPILKAN DATA DARI CONTROLLER
+app\Http\Controller\DataPenjualanController.php@
+```php
+...
+public function index(Request $request)
+{
+  if ($request->get('dari') == '' && $request->get('sampai') == '') {
+    $order = Order::All();
+    return view('data-penjualan.index', ["order" => $order]);
+  }else{
+    $dari = $request->get('dari');
+    $sampai = $request->get('sampai');
+    $order = Order::whereBetween('tanggalOrder', [$dari, $sampai])->get();
+    return view('data-penjualan.index', ["order" => $order]);
+  }
+}
+...
+```
+mengambil seluruh / sebagian (tergantung pada request, defaultnya mengambil seluruh) data penjualan pada function index DataPenjualanController sekaligus me-return view beserta data-nya ($order)
+> CATATAN: melakukan pengecekan terlebih dahulu, jika tidak terdapat request parameter 'dari' dan 'sampai' maka akan mengambil semua data penjualan
+
+##### MENAMPILKAN DATA PENJUALAN DARI CONTROLLER PADA BLADE
+app\resources\views\data-penjualan\index.blade.php
 ##### MELIHAT DETAIL DATA PENJUALAN
 TESS
 Tes
