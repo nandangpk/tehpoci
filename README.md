@@ -231,6 +231,7 @@ mengambil seluruh / sebagian (tergantung pada request, defaultnya mengambil selu
 
 ---------------------
 
+app\Http\Controller\DataPenjualanController.php
 ```php
 ...
 public function show($idOrder)
@@ -518,7 +519,23 @@ terdapat button di atas untuk menuju ke '/minuman/create' (halaman tambah minuma
 ---------------------
 
 ##### MENAMBAHKAN DATA MINUMAN
+app\Http\Controller\MinumanController.php
+```php
+...
+public function create()
+{
+  return view('minuman.tambah');
+}
+...
+```
+
+```
+route: /minuman/create
+target: minuman/tambah.blade.php
+```
+
 app\resources\views\minuman\tambah.blade.php
+
 ```html
 ...
 <form action="{{route('minuman.store')}}" method="post">
@@ -543,6 +560,27 @@ app\resources\views\minuman\tambah.blade.php
 </form>
 ...
 ```
+
+terdapat form untuk membuat data minuman (varian, modal, harga, stok) dengan method POST yang akan di handle pada function store MinumanController (dibawah)
+
+app\Http\Controller\MinumanController.php
+```php
+...
+public function store(Request $request)
+{
+  $minuman = new Minuman;
+
+  $minuman->varian    = $request->get('varian');
+  $minuman->modal    = $request->get('modal');
+  $minuman->harga     = $request->get('harga');
+  $minuman->stok      = $request->get('stok');
+  $minuman->save();
+
+  return redirect()->route('minuman.index');
+}
+...
+```
+
 
 ---------------------
 
