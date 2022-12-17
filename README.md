@@ -561,7 +561,7 @@ app\resources\views\minuman\tambah.blade.php
 ...
 ```
 
-terdapat form untuk membuat data minuman (varian, modal, harga, stok) dengan method POST yang akan di handle pada function store MinumanController (dibawah)
+terdapat form untuk membuat data minuman (varian, modal, harga, stok) dengan method POST yang akan di handle pada function store MinumanController (disertakan dibawah)
 
 app\Http\Controller\MinumanController.php
 ```php
@@ -581,7 +581,98 @@ public function store(Request $request)
 ...
 ```
 
+---------------------
+
+##### EDIT DATA MINUMAN
+app\Http\Controller\MinumanController.php
+```php
+...
+public function edit($id)
+{
+  $minuman = Minuman::findOrFail($id);
+  return view( 'minuman.edit', ['minuman' => $minuman]);
+}
+...
+```
+
+```
+route: /minuman/edit/{$idMinuman}
+target: minuman/edit.blade.php
+note: mencari data minuman berdasarkan idMinuman, kemudian di return dengan view 'minuman.edit' beserta data-nya ($minuman)
+```
+
+app\resources\views\minuman\edit.blade.php
+
+```html
+...
+<form enctype="multipart/form-data" action="{{route('minuman.update', [$minuman->idMinuman])}}" method="post">
+  @csrf
+  <input type="hidden" value="PUT" name="_method">
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="varian" name="varian" value="{{$minuman->varian}}" required>
+    <label for="varian">Varian</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" id="modal" name="modal" value="{{$minuman->modal}}" required>
+    <label for="harga">Modal</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" id="harga" name="harga" value="{{$minuman->harga}}" required>
+    <label for="harga">Harga</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" id="stok" name="stok" value="{{$minuman->stok}}" required>
+    <label for="stok">Stok</label>
+    </div>
+  <input type="submit" class="btn btn-primary w-100" value="Edit data">
+</form>
+...
+```
+data yang di return dari function edit MinumanController kemudian dimasukkan kedalam value masing-masing form
+
+terdapat form untuk merubah data minuman (varian, modal, harga, stok) dengan method POST yang akan di handle pada function update MinumanController (disertakan dibawah)
+
+app\Http\Controller\MinumanController.php
+```php
+...
+public function update(Request $request, $idMinuman)
+{
+  $minuman = Minuman::findOrFail($idMinuman);
+
+    $minuman->varian    = $request->get('varian');
+    $minuman->modal    = $request->get('modal');
+    $minuman->harga     = $request->get('harga');
+    $minuman->stok      = $request->get('stok');
+    $minuman->save();
+
+    return redirect()->route('minuman.index');
+}
+...
+```
 
 ---------------------
+
+
+---------------------
+
+##### HAPUS DATA MINUMAN
+app\Http\Controller\MinumanController.php
+```php
+...
+public function destroy($idMinuman)
+{
+  $minuman = Minuman::findOrFail($idMinuman);
+  $minuman->delete();
+  return redirect()->route('minuman.index');
+}
+...
+```
+
+```
+route: /minuman/hapus/{$idMinuman}
+redirect-to: /minuman
+note: mencari data minuman berdasarkan idMinuman, jika ditemukan maka data minuman akan dihapus menggunakan method delete(), kemudian akan me-redirect kembali ke halaman '/minuman' (index)
+```
+
 
 xxxxxx
