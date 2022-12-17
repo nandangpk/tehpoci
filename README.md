@@ -684,7 +684,7 @@ note: mencari data minuman berdasarkan idMinuman, jika ditemukan maka data minum
 ```
 ---------------------
 
-## #4 Menu Belanja Minuman (BelanjaMinumanController)
+## #5 Menu Belanja Minuman (BelanjaMinumanController)
 
 ---------------------
 
