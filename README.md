@@ -328,4 +328,107 @@ menampilkan data yang di passing dari Controller ($idOrder, $orderDetail) dengan
 
 ---------------------
 
-Tes
+
+
+
+## #3 Menu Data Belanja (DataBelanjaController)
+
+---------------------
+
+##### ROUTING
+app\routes\web.php
+```php
+...
+Route::resource('data-belanja', DataBelanjaController::class);
+...
+```
+melakukan routing pada agar bisa di akses melalui /data-belanja
+
+---------------------
+
+##### GET DATA DARI CONTROLLER + RETURN VIEW DENGAN DATA
+app\Http\Controller\DataBelanjaController.php
+```php
+...
+public function index(Request $request)
+{
+  if ($request->get('dari') == '' && $request->get('sampai') == '') {
+    $belanja = Belanja::All();
+    return view( 'data-belanja.index', ['belanja' => $belanja]);
+  }else{
+    $dari = $request->get('dari');
+    $sampai = $request->get('sampai');
+    $belanja = Belanja::whereBetween('tanggalBelanja', [$dari, $sampai])->get();
+    return view( 'data-belanja.index', ['belanja' => $belanja]);
+  }
+}
+...
+```
+```
+route: /data-belanja
+target: data-belanja/index.blade.php
+```
+
+mengambil seluruh / sebagian (tergantung pada request, defaultnya mengambil seluruh) data belanja pada function index DataBelanjaController sekaligus me-return view beserta data-nya ($belanja)
+> CATATAN: melakukan pengecekan terlebih dahulu, jika tidak terdapat request parameter 'dari' dan 'sampai' maka akan mengambil semua data belanja
+
+---------------------
+
+##### MENAMPILKAN DATA BELANJA DARI CONTROLLER PADA BLADE
+app\resources\views\data-penjualan\index.blade.php
+```html
+...
+
+<form action="{{route('data-belanja.index')}}" method="GET">
+  <table class="table table-borderless">
+    <tr>
+      <td>Dari</td>
+      <td class="w-100"><input type="date" name="dari" required></td>
+    </tr>
+    <tr>
+      <td>Sampai</td>
+      <td class="w-100"><input type="date" name="sampai" required></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/data-belanja">
+          <button type="button" class="btn btn-danger">Reset</button>
+        </a>
+      </td>
+      <td>
+        <button type="submit" class="btn btn-primary">Cari</button>
+      </td>
+    </tr>
+  </table>
+</form>
+<table class="table">
+  <tr>
+    <th>Tanggal Belanja</th>
+    <th>Varian</th>
+    <th>Kuantitas</th>
+    <th>Rp.</th>
+  </tr>
+    @php $total = 0 @endphp
+    @foreach ($belanja as $blj)
+    @php $total = $total + $blj->totalBelanja @endphp
+  <tr>
+    <td>{{$blj->tanggalBelanja}}</td>
+    <td>{{$blj->varian}}</td>
+    <td>{{$blj->kuantitas}}</td>
+    <td>{{$blj->totalBelanja}}</td>
+  </tr>
+  @endforeach
+  <tr>
+    <td colspan="3" class="text-end"><b>Total (Rp.)</b></td>
+    <td><b>{{$total}}</b></td>
+  </tr>
+</table>
+...
+```
+menampilkan data yang di passing dari Controller ($belanja) dengan menggunakan _@foreach_. menghitung total belanja menggunakan variabel $total yang di looping didalam _@foreach_
+
+juga terdapat form untuk menampilkan data berdasarkan tanggal yang dipilih ('dari' dan 'sammpai')
+
+---------------------
+
+xxxxxx
