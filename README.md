@@ -33,6 +33,11 @@ Menggunakan Laravel versi 9.19 dan PHP versi 8.0.2
 * [EDIT DATA MINUMAN](https://github.com/nandangpk/tehpoci/blob/main/README.md#edit-data-minuman)
 * [HAPUS DATA MINUMAN](https://github.com/nandangpk/tehpoci/blob/main/README.md#hapus-data-minuman)
 
+[#5. MENU BELANJA](https://github.com/nandangpk/tehpoci/blob/main/README.md#4-menu-belanja-minuman-belanjaminumancontroller)
+* [ROUTING](https://github.com/nandangpk/tehpoci/blob/main/README.md#routing-4)
+* [GET DATA DARI CONTROLLER + RETURN VIEW](https://github.com/nandangpk/tehpoci/blob/main/README.md#get-data-dari-controller--return-view-dengan-data-4)
+* [MENAMPILKAN DATA MINUMAN DARI CONTROLLER PADA BLADE](https://github.com/nandangpk/tehpoci/blob/main/README.md#menampilkan-data-minuman-dari-controller-pada-blade)
+* [EKSEKUSI BELANJA](https://github.com/nandangpk/tehpoci/blob/main/README.md#eksekusi-belanja-minuman)
 
 ##### Terdapat 5 Controller:
 1. OrderController
