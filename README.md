@@ -106,7 +106,7 @@ Menggunakan Laravel versi 9.19 dan PHP versi 8.0.2
 
 ---------------------
 ##### ROUTING
-app\routes\web.php
+<sub>app\routes\web.php</sub>
 ```php
 ...
 Route::resource('order', OrderController::class);
