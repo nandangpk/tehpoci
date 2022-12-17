@@ -2,27 +2,27 @@
 Menggunakan Laravel versi 9.19 dan PHP versi 8.0.2
 
 ## DAFTAR ISI
-[DAFTAR ISI](https://github.com/nandangpk/tehpoci/edit/main/README.md#daftar-isi)
+[DAFTAR ISI](https://github.com/nandangpk/tehpoci/blob/main/README.md#daftar-isi)
 
-[CONTROLLER](https://github.com/nandangpk/tehpoci/edit/main/README.md#terdapat-5-controller)
+[CONTROLLER](https://github.com/nandangpk/tehpoci/blob/main/README.md#terdapat-5-controller)
 
-[MODEL](https://github.com/nandangpk/tehpoci/edit/main/README.md#terdapat-4-model)
+[MODEL](https://github.com/nandangpk/tehpoci/edit/blob/README.md#terdapat-4-model)
 
 [#1. MENU ORDER](https://github.com/nandangpk/tehpoci/blob/main/README.md#1-menu-order-ordercontroller)
-* [ROUTING](https://github.com/nandangpk/tehpoci/edit/main/README.md#routing)
-* [GET DATA DARI CONTROLLER + RETURN VIEW](https://github.com/nandangpk/tehpoci/edit/main/README.md#get-data-dari-controller--return-view-dengan-data)
-* [MENAMPILKAN DATA ORDER DARI CONTROLLER PADA BLADE](https://github.com/nandangpk/tehpoci/edit/main/README.md#menampilkan-data-dari-controller)
-* [MEMASUKKAN DATA ORDER](https://github.com/nandangpk/tehpoci/edit/main/README.md#menampilkan-data-dari-controller)
+* [ROUTING](https://github.com/nandangpk/tehpoci/blob/main/README.md#routing)
+* [GET DATA DARI CONTROLLER + RETURN VIEW](https://github.com/nandangpk/tehpoci/blob/main/README.md#get-data-dari-controller--return-view-dengan-data)
+* [MENAMPILKAN DATA ORDER DARI CONTROLLER PADA BLADE](https://github.com/nandangpk/tehpoci/blob/main/README.md#menampilkan-data-dari-controller)
+* [MEMASUKKAN DATA ORDER](https://github.com/nandangpk/tehpoci/blob/main/README.md#menampilkan-data-dari-controller)
 
-[#2. MENU DATA PENJUALAN](https://github.com/nandangpk/tehpoci/edit/main/README.md#2-menu-data-penjualan-datapenjualancontroller)
-* [ROUTING](https://github.com/nandangpk/tehpoci/edit/main/README.md#routing-1)
-* [GET DATA DARI CONTROLLER + RETURN VIEW](https://github.com/nandangpk/tehpoci/edit/main/README.md#get-data-dari-controller--return-view-dengan-data-1)
-* [MENAMPILKAN DATA PENJUALAN DARI CONTROLLER PADA BLADE](https://github.com/nandangpk/tehpoci/edit/main/README.md#menampilkan-data-penjualan-dari-controller-pada-blade)
-* [MENAMPILKAN DATA 'DETAIL' PENJUALAN DARI CONTROLLER PADA BLADE](https://github.com/nandangpk/tehpoci/edit/main/README.md#menampilkan-data-detail-penjualan-dari-controller-pada-blade)
+[#2. MENU DATA PENJUALAN](https://github.com/nandangpk/tehpoci/blob/main/README.md#2-menu-data-penjualan-datapenjualancontroller)
+* [ROUTING](https://github.com/nandangpk/tehpoci/blob/main/README.md#routing-1)
+* [GET DATA DARI CONTROLLER + RETURN VIEW](https://github.com/nandangpk/tehpoci/blob/main/README.md#get-data-dari-controller--return-view-dengan-data-1)
+* [MENAMPILKAN DATA PENJUALAN DARI CONTROLLER PADA BLADE](https://github.com/nandangpk/tehpoci/blob/main/README.md#menampilkan-data-penjualan-dari-controller-pada-blade)
+* [MENAMPILKAN DATA 'DETAIL' PENJUALAN DARI CONTROLLER PADA BLADE](https://github.com/nandangpk/tehpoci/blob/main/README.md#menampilkan-data-detail-penjualan-dari-controller-pada-blade)
 
-[#3. MENU DATA BELANJA](https://github.com/nandangpk/tehpoci/edit/main/README.md#3-menu-data-belanja-databelanjacontroller)
-* [ROUTING](https://github.com/nandangpk/tehpoci/edit/main/README.md#routing-2)
-* [GET DATA DARI CONTROLLER + RETURN VIEW](https://github.com/nandangpk/tehpoci/edit/main/README.md#get-data-dari-controller--return-view-dengan-data-2)
+[#3. MENU DATA BELANJA](https://github.com/nandangpk/tehpoci/blob/main/README.md#3-menu-data-belanja-databelanjacontroller)
+* [ROUTING](https://github.com/nandangpk/tehpoci/blob/main/README.md#routing-2)
+* [GET DATA DARI CONTROLLER + RETURN VIEW](https://github.com/nandangpk/tehpoci/blob/main/README.md#get-data-dari-controller--return-view-dengan-data-2)
 * [MENAMPILKAN DATA BELANJA DARI CONTROLLER PADA BLADE](https://github.com/nandangpk/tehpoci/blob/main/README.md#menampilkan-data-belanja-dari-controller-pada-blade)
 
 ##### Terdapat 5 Controller:
