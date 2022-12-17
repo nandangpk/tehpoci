@@ -20,6 +20,11 @@ Menggunakan Laravel versi 9.19 dan PHP versi 8.0.2
 * [MENAMPILKAN DATA PENJUALAN DARI CONTROLLER PADA BLADE](https://github.com/nandangpk/tehpoci/edit/main/README.md#menampilkan-data-penjualan-dari-controller-pada-blade)
 * [MENAMPILKAN DATA 'DETAIL' PENJUALAN DARI CONTROLLER PADA BLADE](https://github.com/nandangpk/tehpoci/edit/main/README.md#menampilkan-data-detail-penjualan-dari-controller-pada-blade)
 
+[#3. MENU DATA BELANJA](https://github.com/nandangpk/tehpoci/edit/main/README.md#3-menu-data-belanja-databelanjacontroller)
+* [ROUTING](https://github.com/nandangpk/tehpoci/edit/main/README.md#routing-2)
+* [GET DATA DARI CONTROLLER + RETURN VIEW](https://github.com/nandangpk/tehpoci/edit/main/README.md#get-data-dari-controller--return-view-dengan-data-2)
+* [MENAMPILKAN DATA BELANJA DARI CONTROLLER PADA BLADE](https://github.com/nandangpk/tehpoci/blob/main/README.md#menampilkan-data-belanja-dari-controller-pada-blade)
+
 ##### Terdapat 5 Controller:
 1. OrderController
     - route: /order
@@ -278,7 +283,9 @@ app\resources\views\data-penjualan\index.blade.php
     <th>Total Order</th>
     <th>Aksi</th>
   </tr>
+  @php $total = 0 @endphp
   @foreach ($order as $orderr)
+  @php $total = $total + $orderr->totalOrder @endphp
   <tr>
     <td>{{$orderr->tanggalOrder}}</td>
     <td>{{$orderr->idOrder}}</td>
@@ -290,6 +297,10 @@ app\resources\views\data-penjualan\index.blade.php
     </td>
   </tr>
   @endforeach
+  <tr>
+    <td colspan="3" class="text-end"><b>Total (Rp.)</b></td>
+    <td><b>{{$total}}</b></td>
+  </tr>
 </table>
 ...
 ```
