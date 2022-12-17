@@ -115,7 +115,7 @@ Route::resource('order', OrderController::class);
 melakukan routing pada agar bisa di akses melalui /order
 
 ##### GET DATA DARI CONTROLLER + RETURN VIEW DENGAN DATA
-app\Http\Controller\OrderController.php
+<sub>app\Http\Controller\OrderController.php</sub>
 ```php
 ...
 public function index()
@@ -130,7 +130,7 @@ mengambil seluruh data Minuman pada function index OrderController sekaligus me-
 
 ---------------------
 ##### MENAMPILKAN DATA DARI CONTROLLER
-app\resources\views\order\index.blade.php
+<sub>app\resources\views\order\index.blade.php</sub>
 ```html
 ...
 <form action="{{route('order.store')}}" method="POST">
@@ -164,7 +164,7 @@ menampilkan data yang di passing dari Controller ($minuman) dengan menggunakan _
 ---------------------
 
 ##### MEMASUKKAN DATA ORDER
-app\Http\Controller\OrderController.php
+<sub>app\Http\Controller\OrderController.php</sub>
 ```php
 ...
 public function store(Request $request)
@@ -205,7 +205,7 @@ mengambil, mengolah serta menyimpan data yang dikirim oleh form pada _app\resour
 ---------------------
 
 ##### ROUTING
-app\routes\web.php
+<sub>app\routes\web.php</sub>
 ```php
 ...
 Route::resource('data-penjualan', DataPenjualanController::class);
@@ -216,7 +216,7 @@ melakukan routing pada agar bisa di akses melalui /data-penjualan
 ---------------------
 
 ##### GET DATA DARI CONTROLLER + RETURN VIEW DENGAN DATA
-app\Http\Controller\DataPenjualanController.php
+<sub>app\Http\Controller\DataPenjualanController.php</sub>
 ```php
 ...
 public function index(Request $request)
@@ -243,7 +243,7 @@ mengambil seluruh / sebagian (tergantung pada request, defaultnya mengambil selu
 
 ---------------------
 
-app\Http\Controller\DataPenjualanController.php
+<sub>app\Http\Controller\DataPenjualanController.php</sub>
 ```php
 ...
 public function show($idOrder)
@@ -263,7 +263,7 @@ mengambil seluruh data dari OrderDetail berdasarkan idOrder sekaligus me-return 
 ---------------------
 
 ##### MENAMPILKAN DATA PENJUALAN DARI CONTROLLER PADA BLADE
-app\resources\views\data-penjualan\index.blade.php
+<sub>app\resources\views\data-penjualan\index.blade.php</sub>
 ```html
 ...
 
@@ -324,7 +324,7 @@ juga terdapat form untuk menampilkan data berdasarkan tanggal yang dipilih ('dar
 ---------------------
 
 ##### MENAMPILKAN DATA DETAIL PENJUALAN DARI CONTROLLER PADA BLADE
-app\resources\views\data-penjualan\detail.blade.php
+<sub>app\resources\views\data-penjualan\detail.blade.php</sub>
 ```html
 ...
 <h5 class="text-center mb-0">ID Order : {{$idOrder}}</h5>
@@ -357,7 +357,7 @@ menampilkan data yang di passing dari Controller ($idOrder, $orderDetail) dengan
 ---------------------
 
 ##### ROUTING
-app\routes\web.php
+<sub>app\routes\web.php</sub>
 ```php
 ...
 Route::resource('data-belanja', DataBelanjaController::class);
@@ -368,7 +368,7 @@ melakukan routing pada agar bisa di akses melalui /data-belanja
 ---------------------
 
 ##### GET DATA DARI CONTROLLER + RETURN VIEW DENGAN DATA
-app\Http\Controller\DataBelanjaController.php
+<sub>app\Http\Controller\DataBelanjaController.php</sub>
 ```php
 ...
 public function index(Request $request)
@@ -396,7 +396,7 @@ mengambil seluruh / sebagian (tergantung pada request, defaultnya mengambil selu
 ---------------------
 
 ##### MENAMPILKAN DATA BELANJA DARI CONTROLLER PADA BLADE
-app\resources\views\data-penjualan\index.blade.php
+<sub>app\resources\views\data-penjualan\index.blade.php</sub>
 ```html
 ...
 
@@ -457,7 +457,7 @@ juga terdapat form untuk menampilkan data berdasarkan tanggal yang dipilih ('dar
 ---------------------
 
 ##### ROUTING
-app\routes\web.php
+<sub>app\routes\web.php</sub>
 ```php
 ...
 Route::resource('minuman', MinumanController::class);
@@ -469,7 +469,7 @@ melakukan routing pada agar bisa di akses melalui /minuman
 ---------------------
 
 ##### GET DATA DARI CONTROLLER + RETURN VIEW DENGAN DATA
-app\Http\Controller\MinumanController.php
+<sub>app\Http\Controller\MinumanController.php</sub>
 ```php
 ...
 public function index()
@@ -489,7 +489,7 @@ mengambil seluruh data minuman pada function index MinumanController sekaligus m
 ---------------------
 
 ##### MENAMPILKAN DATA MINUMAN DARI CONTROLLER PADA BLADE
-app\resources\views\minuman\index.blade.php
+<sub>app\resources\views\minuman\index.blade.php</sub>
 ```html
 ...
 <figure class="text-end">
@@ -531,7 +531,7 @@ terdapat button di atas untuk menuju ke '/minuman/create' (halaman tambah minuma
 ---------------------
 
 ##### MENAMBAHKAN DATA MINUMAN
-app\Http\Controller\MinumanController.php
+<sub>app\Http\Controller\MinumanController.php</sub>
 ```php
 ...
 public function create()
@@ -546,7 +546,7 @@ route: /minuman/create
 target: minuman/tambah.blade.php
 ```
 
-app\resources\views\minuman\tambah.blade.php
+<sub>app\resources\views\minuman\tambah.blade.php</sub>
 
 ```html
 ...
@@ -575,7 +575,7 @@ app\resources\views\minuman\tambah.blade.php
 
 terdapat form untuk membuat data minuman (varian, modal, harga, stok) dengan method POST yang akan di handle pada function store MinumanController (disertakan dibawah)
 
-app\Http\Controller\MinumanController.php
+<sub>app\Http\Controller\MinumanController.php</sub>
 ```php
 ...
 public function store(Request $request)
@@ -596,7 +596,7 @@ public function store(Request $request)
 ---------------------
 
 ##### EDIT DATA MINUMAN
-app\Http\Controller\MinumanController.php
+<sub>app\Http\Controller\MinumanController.php</sub>
 ```php
 ...
 public function edit($id)
@@ -613,7 +613,7 @@ target: minuman/edit.blade.php
 note: mencari data minuman berdasarkan idMinuman, kemudian di return dengan view 'minuman.edit' beserta data-nya ($minuman)
 ```
 
-app\resources\views\minuman\edit.blade.php
+<sub>app\resources\views\minuman\edit.blade.php</sub>
 
 ```html
 ...
@@ -644,7 +644,7 @@ data yang di return dari function edit MinumanController kemudian dimasukkan ked
 
 terdapat form untuk merubah data minuman (varian, modal, harga, stok) dengan method POST yang akan di handle pada function update MinumanController (disertakan dibawah)
 
-app\Http\Controller\MinumanController.php
+<sub>app\Http\Controller\MinumanController.php</sub>
 ```php
 ...
 public function update(Request $request, $idMinuman)
@@ -665,7 +665,7 @@ public function update(Request $request, $idMinuman)
 ---------------------
 
 ##### HAPUS DATA MINUMAN
-app\Http\Controller\MinumanController.php
+<sub>app\Http\Controller\MinumanController.php</sub>
 ```php
 ...
 public function destroy($idMinuman)
@@ -689,7 +689,7 @@ note: mencari data minuman berdasarkan idMinuman, jika ditemukan maka data minum
 ---------------------
 
 ##### ROUTING
-app\routes\web.php
+<sub>app\routes\web.php</sub>
 ```php
 ...
 Route::resource('belanja', BelanjaMinumanController::class);
@@ -700,7 +700,7 @@ melakukan routing pada agar bisa di akses melalui /belanja
 ---------------------
 
 ##### GET DATA DARI CONTROLLER + RETURN VIEW DENGAN DATA
-app\Http\Controller\BelanjaMinumanController.php
+<sub>app\Http\Controller\BelanjaMinumanController.php</sub>
 ```php
 ...
 public function index()
@@ -720,7 +720,7 @@ mengambil seluruh data minuman pada function index BelanjaMinumanController seka
 ---------------------
 
 ##### MENAMPILKAN DATA MINUMAN DARI CONTROLLER PADA BLADE
-app\resources\views\belanja\index.blade.php
+<sub>app\resources\views\belanja\index.blade.php</sub>
 ```html
 ...
 <table class="table mt-3">
@@ -752,7 +752,7 @@ menampilkan data yang di passing dari Controller ($minuman) dengan menggunakan _
 ---------------------
 
 ##### EKSEKUSI BELANJA MINUMAN
-app\Http\Controller\BelanjaMinumanController.php
+<sub>app\Http\Controller\BelanjaMinumanController.php</sub>
 ```php
 ...
 public function show($idMinuman)
@@ -769,7 +769,7 @@ target: belanja/belanja.blade.php
 note: mencari data minuman berdasarkan idMinuman, kemudian di return dengan view 'belanja.belanja' beserta data-nya ($minuman)
 ```
 
-app\resources\views\belanja\belanja.blade.php
+<sub>app\resources\views\belanja\belanja.blade.php</sub>
 ```html
 ...
 <h3 class="text-center mb-0">Belanja {{ $minuman-> varian }}</h3>
@@ -803,7 +803,8 @@ app\resources\views\belanja\belanja.blade.php
 data yang di return dari function show BelanjaMinumanController kemudian dimasukkan kedalam value masing-masing form
 
 terdapat 1 form input untuk menambah stok (belanja) dengan method PUT yang akan di handle pada function update BelanjaMinumanController (disertakan dibawah)
-app\Http\Controller\BelanjaMinumanController.php
+
+<sub>app\Http\Controller\BelanjaMinumanController.php</sub>
 ```php
 ...
 public function update(Request $request, $idMinuman)
