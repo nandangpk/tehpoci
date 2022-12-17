@@ -1,6 +1,9 @@
 # Teh Poci
 Menggunakan Laravel versi 9.19 dan PHP versi 8.0.2
 
+## DAFTAR ISI
+[#1. Menu Order](https://github.com/nandangpk/tehpoci/blob/main/README.md#1-menu-order-ordercontroller)
+
 **Terdapat 5 Controller:**
 1. OrderController
     - route: /order
