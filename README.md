@@ -661,9 +661,6 @@ public function update(Request $request, $idMinuman)
 
 ---------------------
 
-
----------------------
-
 ##### HAPUS DATA MINUMAN
 app\Http\Controller\MinumanController.php
 ```php
@@ -682,6 +679,148 @@ route: /minuman/hapus/{$idMinuman}
 redirect-to: /minuman
 note: mencari data minuman berdasarkan idMinuman, jika ditemukan maka data minuman akan dihapus menggunakan method delete(), kemudian akan me-redirect kembali ke halaman '/minuman' (index)
 ```
+---------------------
 
+## #4 Menu Belanja Minuman (BelanjaMinumanController)
 
-xxxxxx
+---------------------
+
+##### ROUTING
+app\routes\web.php
+```php
+...
+Route::resource('belanja', BelanjaMinumanController::class);
+...
+```
+melakukan routing pada agar bisa di akses melalui /belanja
+
+---------------------
+
+##### GET DATA DARI CONTROLLER + RETURN VIEW DENGAN DATA
+app\Http\Controller\BelanjaMinumanController.php
+```php
+...
+public function index()
+{
+  $minuman = Minuman::All();
+  return view( 'belanja.index', ['minuman' => $minuman]);
+}
+...
+```
+```
+route: /belanja
+target: belanja/index.blade.php
+```
+
+mengambil seluruh data minuman pada function index BelanjaMinumanController sekaligus me-return view beserta data-nya ($minuman)
+
+---------------------
+
+##### MENAMPILKAN DATA MINUMAN DARI CONTROLLER PADA BLADE
+app\resources\views\belanja\index.blade.php
+```html
+...
+<table class="table mt-3">
+  <tr class="text-start">
+    <th>Varian</th>
+    <th>Modal</th>
+    <th>Harga</th>
+    <th>Stok</th>
+    <th>Aksi</th>
+  </tr>
+  @foreach ($minuman as $min)
+  <tr>
+    <td>{{$min->varian}}</td>
+    <td>{{$min->modal}}</td>
+    <td>{{$min->harga}}</td>
+    <td>{{$min->stok}}</td>
+    <td>
+      <a href="{{ route('belanja.show', [$min->idMinuman]) }}">
+        <button type="button" class="btn btn-sm btn-primary">Belanja</button>
+      </a>
+    </td>
+  </tr>
+  @endforeach
+</table>
+...
+```
+menampilkan data yang di passing dari Controller ($minuman) dengan menggunakan _@foreach_, sekaligus membuat clickable button belanja yang dibuat didalam _@foreach_ yang akan me-redirect ke '/belanja/{$idMinuman}' yang di handle pada function show BelanjaMinumanController.
+
+---------------------
+
+##### EKSEKUSI BELANJA MINUMAN
+app\Http\Controller\BelanjaMinumanController.php
+```php
+...
+public function show($idMinuman)
+{
+  $minuman = Minuman::findOrFail($idMinuman);
+  return view( 'belanja.belanja', ['minuman' => $minuman]);
+}
+...
+```
+
+```
+route: /belanja/{$idMinuman}
+target: belanja/belanja.blade.php
+note: mencari data minuman berdasarkan idMinuman, kemudian di return dengan view 'belanja.belanja' beserta data-nya ($minuman)
+```
+
+app\resources\views\belanja\belanja.blade.php
+```html
+...
+<h3 class="text-center mb-0">Belanja {{ $minuman-> varian }}</h3>
+
+<table class="table mt-3">
+  <tr>
+    <th>Modal</th>
+    <th>Harga</th>
+    <th>Stok</th>
+  </tr>
+  <tr>
+    <td>{{$minuman->modal}}</td>
+    <td>{{$minuman->harga}}</td>
+    <td>{{$minuman->stok}}</td>
+  </tr>
+</table>
+
+<form enctype="multipart/form-data" action="{{route('belanja.update', [$minuman->idMinuman])}}" method="post">
+  @csrf
+  <input type="hidden" value="PUT" name="_method">
+  <input type="hidden" name="varian" value="{{ $minuman-> varian }}" required>
+  <input type="hidden" name="modal" value="{{ $minuman-> modal }}" required>
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" name="kuantitas" min="1" required>
+    <label>Jumlah Belanja Stok {{ $minuman-> varian }}</label>
+  </div>
+  <input type="submit" class="btn btn-primary w-100" value="Konfirmasi Belanja">
+</form>
+...
+```
+data yang di return dari function show BelanjaMinumanController kemudian dimasukkan kedalam value masing-masing form
+
+terdapat 1 form input untuk menambah stok (belanja) dengan method PUT yang akan di handle pada function update BelanjaMinumanController (disertakan dibawah)
+app\Http\Controller\BelanjaMinumanController.php
+```php
+...
+public function update(Request $request, $idMinuman)
+{
+  $minuman = Minuman::findOrFail($idMinuman);
+  $minuman->stok      = $minuman->stok + $request->get('kuantitas');
+  $minuman->save();
+        
+  $belanja = new Belanja;
+  $belanja->varian            = $request->get('varian');
+  $belanja->tanggalBelanja    = Carbon::now()->toDateString();
+  $belanja->kuantitas         = $request->get('kuantitas');
+  $belanja->totalBelanja      = $request->get('kuantitas') * $request->get('modal');
+  $belanja->save();
+  return redirect()->route('belanja.index');
+}
+...
+```
+```
+route: /belanja/{$idMinuman}
+redirect-to: /belanja
+note: menambahkan stok berdasarkan input form (stok awal + belanja), kemudian menambahkan data belanja yang di akhiri dengan me-redirect ke halaman belanja
+```
