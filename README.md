@@ -61,29 +61,107 @@ Menggunakan Laravel versi 9.19 dan PHP versi 8.0.2
     |kuantitas|int|
 
 
-## #1 Menu Order
+## #1 Menu Order (OrderController)
+> http://127.0.0.1:8000/order
+
 ![image](https://user-images.githubusercontent.com/54816942/208220021-a85171f9-fb51-4881-86ab-cd843f7209bd.png)
+##### ROUTING
+app\routes\web.php
 ```php
-<form action="{{route('order.store')}}" method="POST">
-      @csrf
-      <table class="table">
-        <tr>
-          <th>Varian</th>
-          <th>Harga</th>
-          <th style="width: 200px">Qty</th>
-        </tr>
-        @foreach($minuman as $min)
-        <tr>
-          <td>{{$min->varian}}</td>
-          <td><input readonly="true" type="number" class="form-control border-0 bg-light" name="harga[]" value="{{$min->harga}}"></td>
-          <td>
-            <input class="form-control" min="0" type="number" name="kuantitas[]" id="" required>
-            <input type="hidden" value="{{$min->varian}}" name="varian[]">
-          </td>
-        </tr>
-        @endforeach
-      </table>
-      <input type="submit" class="btn btn-primary w-100" value="Order">
-    </form>
+...
+Route::resource('order', OrderController::class);
+...
 ```
+melakukan routing pada agar bisa di akses melalui /order
+
+##### GET DATA DARI CONTROLLER + RETURN VIEW DENGAN DATA
+app\Http\Controller\OrderController.php
+```php
+...
+public function index()
+{
+  $minuman = Minuman::All();
+  return view('order.index', ['minuman' => $minuman]);
+}
+...
+```
+mengambil seluruh data Minuman pada function index OrderController sekaligus me-return view beserta data-nya ($minuman)
+
+##### MENAMPILKAN DATA DARI CONTROLLER
+app\resources\views\order\index.blade.php
+```html
+...
+<form action="{{route('order.store')}}" method="POST">
+  @csrf
+  <table class="table">
+    <tr>
+      <th>Varian</th>
+      <th>Harga</th>
+      <th style="width: 200px">Qty</th>
+    </tr>
+    @foreach($minuman as $min)
+    <tr>
+      <td>{{$min->varian}}</td>
+      <td><input readonly="true" type="number" class="form-control border-0 bg-light" name="harga[]" value="{{$min->harga}}"></td>
+      <td>
+        <input class="form-control" min="0" type="number" name="kuantitas[]" id="" required>
+        <input type="hidden" value="{{$min->varian}}" name="varian[]">
+      </td>
+    </tr>
+    @endforeach
+  </table>
+  <input type="submit" class="btn btn-primary w-100" value="Order">
+</form>
+...
+```
+menampilkan data yang di passing dari Controller ($minuman) dengan menggunakan _@foreach_ sekaligus membuat form order yang akan di handle pada function store OrderController 
+
+>pada setiap _name_ input diberikan '[]' karena jenis minumannya lebih dari satu dengan hanya 1 tipe form (akan di handle secara array)
+
+##### MEMASUKKAN DATA ORDER
+app\Http\Controller\OrderController.php
+```php
+...
+public function store(Request $request)
+{
+  $counter = count($request->get('varian'));
+
+  $totalOrder = 0;
+  for($i = 0; $i < $counter; $i++){
+    $totalOrder += ($request->get('harga')[$i] * $request->get('kuantitas')[$i]);
+  }
+
+  $order = new Order;
+  $order->tanggalOrder = Carbon::now()->toDateString();
+  $order->totalOrder = $totalOrder;
+  $order->save();
+
+  $idOrder = Order::max('idOrder');
+  for($i = 0; $i < $counter; $i++){
+    if($request->get('kuantitas')[$i] > 0){
+      $orderDetail = new OrderDetail;
+      $orderDetail->idOrder = $idOrder;
+      $orderDetail->kuantitas = $request->get('kuantitas')[$i];
+      $orderDetail->varian = $request->get('varian')[$i];
+      $orderDetail->save();
+    }
+  }
+  return redirect()->route('order.index');
+}
+...
+```
+mengambil, mengolah serta menyimpan data yang dikirim oleh form pada _app\resources\views\order\index.blade.php_
+
+## #2 Menu Data Penjualan (DataPenjualanController)
+##### ROUTING
+app\routes\web.php
+```php
+...
+Route::resource('data-penjualan', DataPenjualanController::class);
+...
+```
+##### GET DATA DARI CONTROLLER + RETURN VIEW DENGAN DATA
+##### MENAMPILKAN DATA DARI CONTROLLER
+##### MELIHAT DETAIL DATA PENJUALAN
+TESS
 Tes
